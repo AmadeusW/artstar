@@ -1,5 +1,12 @@
 # Development log
 
+## 2025-02-11
+I'm now able to load and save the transformations to multiple files,
+view one file or blended files, with edge detection or without.
+The transformations include translation, rotation and perspective skew.
+Next up:
+Add grid, support moving 
+
 ## 2025-02-07
 I found on line couple implementations of algorithm to align images, but it's not suitable for this project.
 
