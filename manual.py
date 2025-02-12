@@ -1,16 +1,6 @@
 import cv2
 import numpy as np
-
-# Define a class to hold image data
-class ImageData:
-    def __init__(self, filepath):
-        self.filepath = filepath
-        self.image = cv2.imread(filepath)
-        self.translationX = 0
-        self.translationY = 0
-        self.rotation = 0
-        self.skew = 0
-        self.zoom = 0
+from image_data import ImageData, save_image_data, load_image_data
 
 # Initialize list of images instead of individual variables
 useEdgeDetection = False
@@ -19,11 +9,7 @@ currentIndex = 0
 deltaTranslation = 20
 edgeA = 100
 edgeB = 200
-images = [
-    ImageData('data/watertower01.jpg'),
-    ImageData('data/watertower02.jpg'),
-    ImageData('data/watertower03.jpg')
-]
+images = load_image_data()
 
 def getImage(index):
     imageData = images[index]
@@ -85,6 +71,7 @@ while True:
         case 'B':
             useBlending = not useBlending
         case 'Q':
+            save_image_data(images)
             break
         case '=':
             currentIndex = (currentIndex + 1) % len(images)
