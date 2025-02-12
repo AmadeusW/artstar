@@ -15,18 +15,47 @@ def getImage(index):
     imageData = images[index]
     print("using ", index, imageData.filepath)
     image = cv2.Canny(imageData.image, edgeA, edgeB) if useEdgeDetection else imageData.image
-    # Create transformation matrix incorporating translation, rotation and skew
+    
+    # First create rotation matrix
     angle = np.radians(imageData.rotation)
     cos_a = np.cos(angle)
     sin_a = np.sin(angle)
-    skew_rad = np.radians(imageData.skew)
+    
+    # Get image dimensions
+    h, w = image.shape[:2]
+    
+    # Calculate perspective transform matrix
+    # skew_factor determines how much the top/bottom edge shrinks
+    # Positive skew shrinks top edge, negative shrinks bottom edge
+    skew_factor = np.tan(np.radians(imageData.skew))
+    offset = abs(int(w * skew_factor / 2))
+    
+    # Source points are the four corners of the image
+    src_pts = np.float32([[0, 0], [w, 0], [w, h], [0, h]])
+    
+    if imageData.skew >= 0:
+        # Shrink top edge
+        dst_pts = np.float32([[offset, 0], [w - offset, 0], [w, h], [0, h]])
+    else:
+        # Shrink bottom edge
+        dst_pts = np.float32([[0, 0], [w, 0], [w - offset, h], [offset, h]])
+    
+    # Get perspective transform matrix
+    perspective_matrix = cv2.getPerspectiveTransform(src_pts, dst_pts)
+    
+    # Apply perspective transform
+    transformed = cv2.warpPerspective(image, perspective_matrix, (w, h))
+    
+    # Apply rotation and translation
     transform_matrix = np.float32([
-        [cos_a, -sin_a + np.tan(skew_rad), imageData.translationX],
+        [cos_a, -sin_a, imageData.translationX],
         [sin_a, cos_a, imageData.translationY]
     ])
     transform_matrix = transform_matrix * (1 + imageData.zoom)
-    transformed = cv2.warpAffine(image, transform_matrix,
-                                   (imageData.image.shape[1], imageData.image.shape[0]))
+    
+    # Apply final affine transform
+    transformed = cv2.warpAffine(transformed, transform_matrix, (w, h))
+    
     return transformed
 
 def updateImages():
@@ -86,11 +115,11 @@ while True:
         case '}':
             edgeB = constrain_value(edgeB, 10, 0, 255)
         case 'r':
-            images[currentIndex].skew = constrain_value(images[currentIndex].skew, -1, -89, 89)
+            images[currentIndex].skew = constrain_value(images[currentIndex].skew, -1, -45, 45)
         case 'w':
             images[currentIndex].translationY -= deltaTranslation
         case 'f':
-            images[currentIndex].skew = constrain_value(images[currentIndex].skew, 1, -89, 89)
+            images[currentIndex].skew = constrain_value(images[currentIndex].skew, 1, -45, 45)
         case 's':
             images[currentIndex].translationY += deltaTranslation
         case 'q':

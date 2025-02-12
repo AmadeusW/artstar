@@ -1,0 +1,26 @@
+[
+  {
+    "filepath": "data/watertower01.jpg",
+    "translationX": 0,
+    "translationY": -220,
+    "rotation": 1,
+    "skew": 0,
+    "zoom": 0.1
+  },
+  {
+    "filepath": "data/watertower02.jpg",
+    "translationX": 0,
+    "translationY": 0,
+    "rotation": 0,
+    "skew": 0,
+    "zoom": 0
+  },
+  {
+    "filepath": "data/watertower03.jpg",
+    "translationX": 620,
+    "translationY": 640,
+    "rotation": 0,
+    "skew": 0,
+    "zoom": -0.15000000000000002
+  }
+]
