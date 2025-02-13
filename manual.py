@@ -68,15 +68,50 @@ def updateImages():
     else:
         return getImage(currentIndex)
 
+def drawImageInfo(image):
+    # Create text with current image data
+    info_text = f"File: {images[currentIndex].filepath}\n"
+    info_text += f"Translation: ({images[currentIndex].translationX}, {images[currentIndex].translationY})\n"
+    info_text += f"Rotation: {images[currentIndex].rotation}°\n"
+    info_text += f"Skew: {images[currentIndex].skew}°\n"
+    info_text += f"Zoom: {images[currentIndex].zoom:.2f}"
+
+    # Split text into lines
+    lines = info_text.split('\n')
+
+    # Set text parameters
+    font = cv2.FONT_HERSHEY_PLAIN
+    font_scale = 1
+    thickness = 1
+    padding = 10
+    line_spacing = 25
+
+    # Create a copy of the image to avoid modifying the original
+    image_with_text = image.copy()
+
+    # Draw black background and white text for each line
+    y = padding
+    for line in lines:
+        size = cv2.getTextSize(line, font, font_scale, thickness)[0]
+        cv2.putText(image_with_text, line, (padding, y + size[1]), font, font_scale, (255,255,255), thickness)
+        y += line_spacing
+
+    return image_with_text
+
 def updateWindow(image):
     window_name = 'Art Star'
     cv2.namedWindow(window_name, cv2.WINDOW_NORMAL)
     screen = cv2.getWindowImageRect(window_name)
+
+    # Apply transform
     if screen[2] > 0 and screen[3] > 0:  # If window dimensions are valid
         scale = min(screen[2] / image.shape[1], screen[3] / image.shape[0])
         width = int(image.shape[1] * scale)
         height = int(image.shape[0] * scale)
         image = cv2.resize(image, (width, height), interpolation=cv2.INTER_AREA)
+
+    # Add image info
+    image = drawImageInfo(image)
     cv2.imshow('Art Star', image)
 
 def update():
