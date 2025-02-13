@@ -21,6 +21,13 @@ class ImageData:
             'zoom': self.zoom
         }
 
+    def applyTransformation(self, otherData):
+        self.translationX = otherData.translationX
+        self.translationY = otherData.translationY
+        self.rotation = otherData.rotation
+        self.skew = otherData.skew
+        self.zoom = otherData.zoom
+
     @classmethod
     def from_dict(cls, data):
         image_data = cls(data['filepath'])
