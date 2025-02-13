@@ -1,22 +1,286 @@
 [
   {
     "filepath": "data/watertower01.jpg",
-    "translationX": 0,
-    "translationY": -220,
-    "rotation": 1,
+    "translationX": 620,
+    "translationY": 640,
+    "rotation": 0,
     "skew": 0,
-    "zoom": 0.1
+    "zoom": -0.15000000000000002
   },
   {
     "filepath": "data/watertower02.jpg",
-    "translationX": 0,
-    "translationY": 0,
+    "translationX": 480,
+    "translationY": 680,
     "rotation": 0,
     "skew": 0,
-    "zoom": 0
+    "zoom": -0.15000000000000002
   },
   {
     "filepath": "data/watertower03.jpg",
+    "translationX": 620,
+    "translationY": 700,
+    "rotation": 0,
+    "skew": 0,
+    "zoom": -0.15000000000000002
+  },
+  {
+    "filepath": "data/watertower04.jpg",
+    "translationX": 640,
+    "translationY": 420,
+    "rotation": 0,
+    "skew": 0,
+    "zoom": -0.15000000000000002
+  },
+  {
+    "filepath": "data/watertower05.jpg",
+    "translationX": 460,
+    "translationY": 420,
+    "rotation": -1,
+    "skew": 0,
+    "zoom": -0.10000000000000002
+  },
+  {
+    "filepath": "data/watertower06.jpg",
+    "translationX": 620,
+    "translationY": 640,
+    "rotation": 0,
+    "skew": 0,
+    "zoom": -0.15000000000000002
+  },
+  {
+    "filepath": "data/watertower07.jpg",
+    "translationX": 620,
+    "translationY": 640,
+    "rotation": 0,
+    "skew": 0,
+    "zoom": -0.15000000000000002
+  },
+  {
+    "filepath": "data/watertower08.jpg",
+    "translationX": 620,
+    "translationY": 640,
+    "rotation": 0,
+    "skew": 0,
+    "zoom": -0.15000000000000002
+  },
+  {
+    "filepath": "data/watertower09.jpg",
+    "translationX": 620,
+    "translationY": 640,
+    "rotation": 0,
+    "skew": 0,
+    "zoom": -0.15000000000000002
+  },
+  {
+    "filepath": "data/watertower10.jpg",
+    "translationX": 620,
+    "translationY": 640,
+    "rotation": 0,
+    "skew": 0,
+    "zoom": -0.15000000000000002
+  },
+  {
+    "filepath": "data/watertower11.jpg",
+    "translationX": 620,
+    "translationY": 640,
+    "rotation": 0,
+    "skew": 0,
+    "zoom": -0.15000000000000002
+  },
+  {
+    "filepath": "data/watertower12.jpg",
+    "translationX": 620,
+    "translationY": 640,
+    "rotation": 0,
+    "skew": 0,
+    "zoom": -0.15000000000000002
+  },
+  {
+    "filepath": "data/watertower13.jpg",
+    "translationX": 620,
+    "translationY": 640,
+    "rotation": 0,
+    "skew": 0,
+    "zoom": -0.15000000000000002
+  },
+  {
+    "filepath": "data/watertower14.jpg",
+    "translationX": 620,
+    "translationY": 640,
+    "rotation": 0,
+    "skew": 0,
+    "zoom": -0.15000000000000002
+  },
+  {
+    "filepath": "data/watertower15.jpg",
+    "translationX": 620,
+    "translationY": 640,
+    "rotation": 0,
+    "skew": 0,
+    "zoom": -0.15000000000000002
+  },
+  {
+    "filepath": "data/watertower16.jpg",
+    "translationX": 620,
+    "translationY": 640,
+    "rotation": 0,
+    "skew": 0,
+    "zoom": -0.15000000000000002
+  },
+  {
+    "filepath": "data/watertower17.jpg",
+    "translationX": 620,
+    "translationY": 640,
+    "rotation": 0,
+    "skew": 0,
+    "zoom": -0.15000000000000002
+  },
+  {
+    "filepath": "data/watertower18.jpg",
+    "translationX": 620,
+    "translationY": 640,
+    "rotation": 0,
+    "skew": 0,
+    "zoom": -0.15000000000000002
+  },
+  {
+    "filepath": "data/watertower19.jpg",
+    "translationX": 620,
+    "translationY": 640,
+    "rotation": 0,
+    "skew": 0,
+    "zoom": -0.15000000000000002
+  },
+  {
+    "filepath": "data/watertower20.jpg",
+    "translationX": 620,
+    "translationY": 640,
+    "rotation": 0,
+    "skew": 0,
+    "zoom": -0.15000000000000002
+  },
+  {
+    "filepath": "data/watertower21.jpg",
+    "translationX": 620,
+    "translationY": 640,
+    "rotation": 0,
+    "skew": 0,
+    "zoom": -0.15000000000000002
+  },
+  {
+    "filepath": "data/watertower22.jpg",
+    "translationX": 620,
+    "translationY": 640,
+    "rotation": 0,
+    "skew": 0,
+    "zoom": -0.15000000000000002
+  },
+  {
+    "filepath": "data/watertower23.jpg",
+    "translationX": 620,
+    "translationY": 640,
+    "rotation": 0,
+    "skew": 0,
+    "zoom": -0.15000000000000002
+  },
+  {
+    "filepath": "data/watertower24.jpg",
+    "translationX": 620,
+    "translationY": 640,
+    "rotation": 0,
+    "skew": 0,
+    "zoom": -0.15000000000000002
+  },
+  {
+    "filepath": "data/watertower25.jpg",
+    "translationX": 620,
+    "translationY": 640,
+    "rotation": 0,
+    "skew": 0,
+    "zoom": -0.15000000000000002
+  },
+  {
+    "filepath": "data/watertower26.jpg",
+    "translationX": 620,
+    "translationY": 640,
+    "rotation": 0,
+    "skew": 0,
+    "zoom": -0.15000000000000002
+  },
+  {
+    "filepath": "data/watertower27.jpg",
+    "translationX": 620,
+    "translationY": 640,
+    "rotation": 0,
+    "skew": 0,
+    "zoom": -0.15000000000000002
+  },
+  {
+    "filepath": "data/watertower28.jpg",
+    "translationX": 620,
+    "translationY": 640,
+    "rotation": 0,
+    "skew": 0,
+    "zoom": -0.15000000000000002
+  },
+  {
+    "filepath": "data/watertower29.jpg",
+    "translationX": 620,
+    "translationY": 640,
+    "rotation": 0,
+    "skew": 0,
+    "zoom": -0.15000000000000002
+  },
+  {
+    "filepath": "data/watertower30.jpg",
+    "translationX": 620,
+    "translationY": 640,
+    "rotation": 0,
+    "skew": 0,
+    "zoom": -0.15000000000000002
+  },
+  {
+    "filepath": "data/watertower31.jpg",
+    "translationX": 620,
+    "translationY": 640,
+    "rotation": 0,
+    "skew": 0,
+    "zoom": -0.15000000000000002
+  },
+  {
+    "filepath": "data/watertower32.jpg",
+    "translationX": 620,
+    "translationY": 640,
+    "rotation": 0,
+    "skew": 0,
+    "zoom": -0.15000000000000002
+  },
+  {
+    "filepath": "data/watertower33.jpg",
+    "translationX": 620,
+    "translationY": 640,
+    "rotation": 0,
+    "skew": 0,
+    "zoom": -0.15000000000000002
+  },
+  {
+    "filepath": "data/watertower34.jpg",
+    "translationX": 620,
+    "translationY": 640,
+    "rotation": 0,
+    "skew": 0,
+    "zoom": -0.15000000000000002
+  },
+  {
+    "filepath": "data/watertower35.jpg",
+    "translationX": 620,
+    "translationY": 640,
+    "rotation": 0,
+    "skew": 0,
+    "zoom": -0.15000000000000002
+  },
+  {
+    "filepath": "data/watertower36.jpg",
     "translationX": 620,
     "translationY": 640,
     "rotation": 0,

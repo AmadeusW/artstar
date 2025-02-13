@@ -102,6 +102,10 @@ while True:
         case 'Q':
             save_image_data(images)
             break
+        case 'C':
+            copied_data = images[currentIndex]
+        case 'V':
+            images[currentIndex].applyTransformation(copied_data)
         case '=':
             currentIndex = (currentIndex + 1) % len(images)
         case '-':
