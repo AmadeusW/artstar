@@ -201,10 +201,10 @@ while True:
             images[currentIndex].translationX += deltaTranslation
             print(f"translationX {images[currentIndex].translationX}")
         case 'z':
-            images[currentIndex].zoom -= 0.05
+            images[currentIndex].zoom -= 0.01
             print(f"zoom {images[currentIndex].zoom}")
         case 'x':
-            images[currentIndex].zoom += 0.05
+            images[currentIndex].zoom += 0.01
             print(f"zoom {images[currentIndex].zoom}")
     update()
 
