@@ -2,17 +2,11 @@
 
 ## 2025-02-21
 Hooked up `uv`, I'm looking forward to using it.
-
+Productive night:
 Blended base image with edge detected image
 Support toggling overlay between next and previous image
-Expand printed information
+Cleaned up printed information and prints to console just the user's action
 
-Also, here's a todo of things to do:
-- see sequence of images
-  - arbitrary number of next (or previous) images
-    - note: addWeighted supports adding just two images
-  - consider: customize blending and whether edge detection is used for each image
-- see grid
 
 ## 2025-02-11
 I'm now able to load and save the transformations to multiple files,

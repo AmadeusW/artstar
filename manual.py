@@ -15,20 +15,12 @@ images = load_image_data()
 def getImage(index, useEdgeDetection):
     imageData = images[index]
     image = imageData.image
+    h, w = image.shape[:2]
+    #print(f"Image #{index} `{imageData.filepath}`, {w}x{h} edge {useEdgeDetection}.")
 
     if useEdgeDetection:
         edgeDetected = cv2.Canny(imageData.image, edgeA, edgeB)
         image = cv2.cvtColor(edgeDetected, cv2.COLOR_GRAY2RGB)
-    
-    # First create rotation matrix
-    angle = np.radians(imageData.rotation)
-    cos_a = np.cos(angle)
-    sin_a = np.sin(angle)
-    
-    # Get image dimensions
-    h, w = image.shape[:2]
-
-    print(f"Image #{index} `{imageData.filepath}`, {w}x{h} edge {useEdgeDetection}.")
     
     # Calculate perspective transform matrix
     # skew_factor determines how much the top/bottom edge shrinks
@@ -39,38 +31,32 @@ def getImage(index, useEdgeDetection):
     # Source points are the four corners of the image
     src_pts = np.float32([[0, 0], [w, 0], [w, h], [0, h]])
     
-    if imageData.skew >= 0:
-        # Shrink top edge
+    if imageData.skew >= 0: # Shrink top edge
         dst_pts = np.float32([[offset, 0], [w - offset, 0], [w, h], [0, h]])
-    else:
-        # Shrink bottom edge
+    else: # Shrink bottom edge
         dst_pts = np.float32([[0, 0], [w, 0], [w - offset, h], [offset, h]])
     
-    # Get perspective transform matrix
+    # Perspective transform matrix
     perspective_matrix = cv2.getPerspectiveTransform(src_pts, dst_pts)
-    
-    # Apply perspective transform
     transformed = cv2.warpPerspective(image, perspective_matrix, (w, h))
-    
-    print(f"Transformed {transformed.shape[:2]}.")
 
-    # Apply rotation and translation
+    # Rotation and translation
+    angle = np.radians(imageData.rotation)
+    cos_a = np.cos(angle)
+    sin_a = np.sin(angle)
     transform_matrix = np.float32([
         [cos_a, -sin_a, imageData.translationX],
         [sin_a, cos_a, imageData.translationY]
     ])
     transform_matrix = transform_matrix * (1 + imageData.zoom)
-    
-    # Apply final affine transform
     transformed = cv2.warpAffine(transformed, transform_matrix, (w, h))
-    print(f"Final {transformed.shape[:2]}.")
+
     return transformed
 
 def getBlendedIndex():
     return currentIndex - 1 if direction else currentIndex + 1
 
 def updateImages():
-    print("update. blending ", useBlending)
     if useBlending:
         return cv2.addWeighted(
             getImage(currentIndex, False), 1,
@@ -130,7 +116,6 @@ def updateWindow(image):
     cv2.imshow('Art Star', image)
 
 def update():
-    print("updating")
     finalImage = updateImages()
     updateWindow(finalImage)
 
@@ -147,49 +132,71 @@ while True:
     match chr(key & 0xFF):
         case 'E':
             useEdgeDetection = not useEdgeDetection
+            print(f"useEdgeDetection {useEdgeDetection}")
         case 'B':
             useBlending = not useBlending
+            print(f"useBlending {useBlending}")
         case '`':
             direction = not direction
+            print(f"direction {direction}")
         case 'Q':
+            print(f"Saving on close...")
             save_image_data(images)
             break
         case 'C':
+            print(f"Copied transformation of {copied_data}")
             copied_data = images[currentIndex]
         case 'V':
+            print(f"Pasted transformation {copied_data}")
             images[currentIndex].applyTransformation(copied_data)
         case '=':
             currentIndex = (currentIndex + 1) % len(images)
+            print(f"currentIndex {currentIndex}")
         case '-':
             currentIndex = (currentIndex - 1) % len(images)
+            print(f"currentIndex {currentIndex}")
         case '[':
             edgeA = constrain_value(edgeA, -10, 0, 255)
+            print(f"edgeA {edgeA}")
         case ']':
             edgeA = constrain_value(edgeA, 10, 0, 255)
+            print(f"edgeA {edgeA}")
         case '{':
             edgeB = constrain_value(edgeB, -10, 0, 255)
+            print(f"edgeB {edgeB}")
         case '}':
             edgeB = constrain_value(edgeB, 10, 0, 255)
+            print(f"edgeB {edgeB}")
         case 'r':
             images[currentIndex].skew = constrain_value(images[currentIndex].skew, -1, -45, 45)
+            print(f"skew {images[currentIndex].skew}")
         case 'w':
             images[currentIndex].translationY -= deltaTranslation
+            print(f"translationY {images[currentIndex].translationY}")
         case 'f':
             images[currentIndex].skew = constrain_value(images[currentIndex].skew, 1, -45, 45)
+            print(f"skew {images[currentIndex].skew}")
         case 's':
             images[currentIndex].translationY += deltaTranslation
+            print(f"translationY {images[currentIndex].translationY}")
         case 'q':
             images[currentIndex].rotation = constrain_value(images[currentIndex].rotation, -1, -180, 180)
+            print(f"rotation {images[currentIndex].rotation}")
         case 'a':
             images[currentIndex].translationX -= deltaTranslation
+            print(f"translationX {images[currentIndex].translationX}")
         case 'e':
             images[currentIndex].rotation = constrain_value(images[currentIndex].rotation, 1, -180, 180)
+            print(f"rotation {images[currentIndex].rotation}")
         case 'd':
             images[currentIndex].translationX += deltaTranslation
+            print(f"translationX {images[currentIndex].translationX}")
         case 'z':
             images[currentIndex].zoom -= 0.05
+            print(f"zoom {images[currentIndex].zoom}")
         case 'x':
             images[currentIndex].zoom += 0.05
+            print(f"zoom {images[currentIndex].zoom}")
     update()
 
 cv2.destroyAllWindows()
