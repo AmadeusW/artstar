@@ -1,5 +1,13 @@
 # Development log
 
+## 2025-02-21
+Hooked up `uv`, I'm looking forward to using it.
+Also, here's a todo of things to do:
+- see sequence of images
+  - arbitrary number of next (or previous) images
+  - it should be possible to customize blending and whether edge detection is used
+- see grid
+
 ## 2025-02-11
 I'm now able to load and save the transformations to multiple files,
 view one file or blended files, with edge detection or without.
