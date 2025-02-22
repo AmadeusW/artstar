@@ -40,13 +40,22 @@ def getImage(index, useEdgeDetection):
     perspective_matrix = cv2.getPerspectiveTransform(src_pts, dst_pts)
     transformed = cv2.warpPerspective(image, perspective_matrix, (w, h))
 
+    # Calculate center offset for zoom
+    center_x = w / 2
+    center_y = h / 2
+    zoom_scale = 1 + imageData.zoom
+    
+    # Adjust translation to account for zoom from center
+    adjusted_x = imageData.translationX + center_x * (1 - zoom_scale)
+    adjusted_y = imageData.translationY + center_y * (1 - zoom_scale)
+
     # Rotation and translation
     angle = np.radians(imageData.rotation)
     cos_a = np.cos(angle)
     sin_a = np.sin(angle)
     transform_matrix = np.float32([
-        [cos_a, -sin_a, imageData.translationX],
-        [sin_a, cos_a, imageData.translationY]
+        [cos_a, -sin_a, adjusted_x],
+        [sin_a, cos_a, adjusted_y]
     ])
     transform_matrix = transform_matrix * (1 + imageData.zoom)
     transformed = cv2.warpAffine(transformed, transform_matrix, (w, h))
