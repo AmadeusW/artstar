@@ -2,10 +2,14 @@
 
 ## 2025-02-21
 Hooked up `uv`, I'm looking forward to using it.
+
+Blended base image with edge detected image
+
 Also, here's a todo of things to do:
 - see sequence of images
   - arbitrary number of next (or previous) images
-  - it should be possible to customize blending and whether edge detection is used
+    - note: addWeighted supports adding just two images
+  - consider: customize blending and whether edge detection is used for each image
 - see grid
 
 ## 2025-02-11

@@ -11,10 +11,13 @@ edgeA = 100
 edgeB = 200
 images = load_image_data()
 
-def getImage(index):
+def getImage(index, useEdgeDetection):
     imageData = images[index]
-    print("using ", index, imageData.filepath)
-    image = cv2.Canny(imageData.image, edgeA, edgeB) if useEdgeDetection else imageData.image
+    image = imageData.image
+
+    if useEdgeDetection:
+        edgeDetected = cv2.Canny(imageData.image, edgeA, edgeB)
+        image = cv2.cvtColor(edgeDetected, cv2.COLOR_GRAY2RGB)
     
     # First create rotation matrix
     angle = np.radians(imageData.rotation)
@@ -23,6 +26,8 @@ def getImage(index):
     
     # Get image dimensions
     h, w = image.shape[:2]
+
+    print(f"Image #{index} `{imageData.filepath}`, {w}x{h} edge {useEdgeDetection}.")
     
     # Calculate perspective transform matrix
     # skew_factor determines how much the top/bottom edge shrinks
@@ -46,6 +51,8 @@ def getImage(index):
     # Apply perspective transform
     transformed = cv2.warpPerspective(image, perspective_matrix, (w, h))
     
+    print(f"Transformed {transformed.shape[:2]}.")
+
     # Apply rotation and translation
     transform_matrix = np.float32([
         [cos_a, -sin_a, imageData.translationX],
@@ -55,18 +62,18 @@ def getImage(index):
     
     # Apply final affine transform
     transformed = cv2.warpAffine(transformed, transform_matrix, (w, h))
-    
+    print(f"Final {transformed.shape[:2]}.")
     return transformed
 
 def updateImages():
     print("update. blending ", useBlending)
     if useBlending:
         return cv2.addWeighted(
-            getImage(currentIndex), 0.5,
-            getImage((currentIndex - 1) % len(images)), 0.5,
+            getImage(currentIndex, False), 1,
+            getImage((currentIndex - 1) % len(images), useEdgeDetection), 0.5,
             0)
     else:
-        return getImage(currentIndex)
+        return getImage(currentIndex, False)
 
 def drawImageInfo(image):
     # Create text with current image data
