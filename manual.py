@@ -5,6 +5,7 @@ from image_data import ImageData, save_image_data, load_image_data
 # Initialize list of images instead of individual variables
 useEdgeDetection = False
 useBlending = False
+direction = False
 currentIndex = 0
 deltaTranslation = 20
 edgeA = 100
@@ -65,12 +66,15 @@ def getImage(index, useEdgeDetection):
     print(f"Final {transformed.shape[:2]}.")
     return transformed
 
+def getBlendedIndex():
+    return currentIndex - 1 if direction else currentIndex + 1
+
 def updateImages():
     print("update. blending ", useBlending)
     if useBlending:
         return cv2.addWeighted(
             getImage(currentIndex, False), 1,
-            getImage((currentIndex - 1) % len(images), useEdgeDetection), 0.5,
+            getImage(getBlendedIndex() % len(images), useEdgeDetection), 0.5,
             0)
     else:
         return getImage(currentIndex, False)
@@ -78,10 +82,14 @@ def updateImages():
 def drawImageInfo(image):
     # Create text with current image data
     info_text = f"File: {images[currentIndex].filepath}\n"
-    info_text += f"Translation: ({images[currentIndex].translationX}, {images[currentIndex].translationY})\n"
-    info_text += f"Rotation: {images[currentIndex].rotation}°\n"
-    info_text += f"Skew: {images[currentIndex].skew}°\n"
-    info_text += f"Zoom: {images[currentIndex].zoom:.2f}"
+    info_text += f"Transform: "
+    info_text += f"x {images[currentIndex].translationX}, y {images[currentIndex].translationY} "
+    info_text += f"r {images[currentIndex].rotation} "
+    info_text += f"p {images[currentIndex].skew} "
+    info_text += f"s {images[currentIndex].zoom:.2f}\n"
+
+    if useBlending:
+        info_text += f"Overlay: {images[getBlendedIndex()].filepath}\n"
 
     # Split text into lines
     lines = info_text.split('\n')
@@ -141,6 +149,8 @@ while True:
             useEdgeDetection = not useEdgeDetection
         case 'B':
             useBlending = not useBlending
+        case '`':
+            direction = not direction
         case 'Q':
             save_image_data(images)
             break

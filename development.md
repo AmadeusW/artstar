@@ -4,6 +4,8 @@
 Hooked up `uv`, I'm looking forward to using it.
 
 Blended base image with edge detected image
+Support toggling overlay between next and previous image
+Expand printed information
 
 Also, here's a todo of things to do:
 - see sequence of images
